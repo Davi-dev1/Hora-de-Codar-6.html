@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <script>
+var cadastros=[];
+
+function olá(){
+var usuario=prompt("Digite seu nome para começar");
+
+    alert(" Olá  " +usuario + ", " +" seja muito bem vindo á nossa agenda");
+}
+olá();
+
+function menu(){
+let opções=prompt("Escolha uma das opções  abaixo: \n1)Cadastramento \n2) Pesquisar por Nomes \n3)Mostrar todos os registros \n4) Sair   ");
+switch(opções){
+
+    case "1":
+        cadastramento();
+      break;
+        case "2":
+            pesquisar();
+            break;
+            case "3":
+            mostrarregistros();
+            break;
+            case "4":
+                saida();
+                break;
+}
+
+
+
+}
+menu();
+
+function cadastramento(){
+while(cadastros.length<10){
+    var seuNome=prompt("Digite 10 nomes aqui para o cadastramento");
+if(seuNome){
+cadastros.push({nome:seuNome});
+}
+
+if(cadastros.length>=10){
+alert("Foi realizado 10 cadastros");
+break;
+}
+
+}
+
+ 
+menu();
+}
+   
+function pesquisar(){
+var pesquisa=prompt("Escreva o nome de um usuário que deseja econtrar");
+var encontrado=cadastros.find(c=>c.nome.toLowerCase()===pesquisa.toLowerCase());//find é usado para encontrar um unico elemento
+if(encontrado){
+    alert(pesquisa +" foi encontrado com sucesso!!!");
+    
+}else{
+    alert("Usuário não encontrado");
+}
+menu();
+
+}
+ function mostrarregistros(){
+if (cadastros.length===0){
+    alert("Não há registros");
+}else{
+    var nomes=cadastros.map(c=>c.nome).sort().join( "-" ,"\n");
+    alert("A lista de nomes cadastrados na sua agenda são:  \n" +  nomes  + "\n");
+
+}
+menu();
+
+ }
+ function saida(){
+alert("Voce saiu da agenda");
+window.close();
+
+ }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

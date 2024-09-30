@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastramento de funcionários</title>
+    <script>
+var registr_de_funcionários=[]; 
+
+
+function menu (){  
+var menu=prompt("Escolha uma das opções abaixo: \n1)Cadastramento \n2)Pesquisar por matricula \n3)Mostrar todos os registros \n4)Sair");
+switch(menu){
+    case "1":   
+    cadastro();    
+break;
+case '2':
+pesquisar();
+break;
+case '3':
+apresentar();
+break;
+case '4':   
+alert("Saindo...");
+break;  
+default: 
+alert("Opcão inválida");
+menu();
+
+}
+}
+function cadastro (){
+for(let i=0; i<20; i++){
+    var nome=prompt("Digite o nome do funcionário " + (i+1) + " que deseja cadastrar");
+    var matricula=prompt("Digite a matricula do funcionário que deseja cadastrar");
+  
+ 
+    while (isNaN(matricula)) {
+ alert("Por favor, insira uma matricula válida (apenas números).");
+ matricula=prompt("Digite a matricula do funcionário que deseja cadastrar");
+    }
+    var salario=prompt("Digite o salario do funcionário que deseja cadastrar");
+    while (isNaN(salario)) {
+ alert("Por favor, insira um valor para o salario (apenas números).");
+ salario=prompt("Digite o salario do funcionário que deseja cadastrar");            
+    }
+    registr_de_funcionários.push({nome:nome, matricula:matricula, salario:parseFloat(salario)});
+    alert("Funcionário "+ nome +" foi cadastrado com sucesso");
+  
+}
+menu();
+}
+
+
+
+function pesquisar (){
+var pesquisa=prompt("Digite a matricula do funcionário que deseja encontrar");
+var encontrar_funcionários=registr_de_funcionários.find(f=>f.matricula===pesquisa);
+if(encontrar_funcionários){ 
+    alert("Funcionário "+encontrar_funcionários.nome+" com matricula "+encontrar_funcionários.matricula+" e que ganha "+encontrar_funcionários.salario.toFixed()+" reais");
+
+}else{
+    alert("Funcionário não encontrado");
+}
+
+
+menu();
+}
+function apresentar() {
+    var salarioabaixo = registr_de_funcionários.filter(f => f.salario < 1000);
+    var salarioacima = registr_de_funcionários.filter(f => f.salario >= 1000);
+
+    let alerta = "Funcionários que ganham abaixo de 1000 reais:\n\n";
+
+    if (salarioabaixo.length === 0) {
+        alerta += "Nenhum funcionário com salário abaixo de 1000 foi encontrado.\n\n";
+    } else {
+        salarioabaixo.forEach(funcionario => {
+            alerta += (funcionario.nome + " ganha R$" +funcionario.salario.toFixed(2) + "reais\n")});
+    }
+
+    alerta += "\nFuncionários que ganham 1000 reais ou mais:\n\n";
+    
+    if (salarioacima.length === 0) {
+        alerta += "Nenhum funcionário com salário acima de 1000 foi encontrado.";
+    } else {
+        salarioacima.forEach(funcionario => {
+            alerta += (funcionario.nome + " ganha R$" + funcionario.salario.toFixed(2) + "reais\n")});
+    }
+
+    alert(alerta);
+    menu();
+}
+
+
+
+menu();
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

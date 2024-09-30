@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+var registros=[];
+var notas=[];
+function saudação(){
+   var professor= prompt("Digite o seu nome");
+   alert(professor +" é um prazer ter você por aqui");
+}
+saudação();
+
+function menu(){
+    var escolha = prompt("Escolha um dos itens abaixo: \n1)Registrar \n2)Pesquisar por nome \n3)Mostrar todos os registros \n4)Sair");
+
+    switch(escolha){
+        case "1":
+            Registrar();
+            break;
+        case "2":
+            pesquisar();
+            break;
+        case "3":
+            apresentar();
+            break;
+        case "4":
+         fechar();
+          break;
+      
+  
+        }
+}
+
+menu();
+function Registrar(){
+    for(i = 0; i < 20; i++){
+        var registra = prompt("Registre o nome do aluno " + (i + 1) + ":");
+        var nota = parseInt(prompt("Digite a nota do " + registra + ":"));
+        
+        while (isNaN(nota) || nota < 0 || nota > 10) {
+            alert("Por favor, insira uma nota válida (entre 0 e 10).");
+            nota = parseInt(prompt("Digite a nota do " + registra + ":"));
+        }
+        
+        registros.push({registra: registra, nota: nota});
+    }
+    alert("Registro Salvo!");
+    menu();
+}
+
+function pesquisar(){
+    var pesquisa = prompt("Escreva o nome de um aluno que deseja encontrar");
+    var encontrado = registros.find(r => r.registra.toLowerCase() === pesquisa.toLowerCase()); // find é usado para encontrar um único elemento
+    //utilizamos o "d." ou qualquer outra letra na linha anterior para definir como será trabalhado o elemento do array nas proximas linhas
+
+    if(encontrado){
+        alert(pesquisa +" foi encontrado com sucesso!!!");
+        alert("Nota do " + pesquisa + " é: " + encontrado.nota);
+        var status = encontrado.nota < 5 ? "Reprovado" : "Aprovado";
+        alert("Status: " + pesquisa + " está " + status);
+    } else {
+        alert("Usuário não encontrado");
+    }
+    menu();
+}
+
+function apresentar(){
+    if (registros.length === 0) {
+        alert("Nenhum registro encontrado.");
+        return;
+    }
+
+    var lista = registros.map(r => {
+        var status = r.nota < 5 ? "Reprovado" : "Aprovado";// essa variavel vai ser usada para definir o status da nota, observe que tem um "r." antes da variavel definindo a nota assim como na linha 56 tinha um "r." definindo o registro.
+        return r.registra + ": " + r.nota + " - " + status;
+    }).join("\n");
+
+    alert("Registros:\n" + lista);
+    menu();
+}
+function fechar(){
+alert("Voce saiu do programa");
+window.close();
+}
+
+</script>
+
+</head>
+<body>
+</body>
+</html>
